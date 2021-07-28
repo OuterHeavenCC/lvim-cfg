@@ -8,6 +8,3 @@ package.loaded['nord.functions'] = nil
 require('nord').set()
 EOF
 
-set spelllang=fr
-let g:vimwiki_list = [{'path': '~/.Wiki',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]

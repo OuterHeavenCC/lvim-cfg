@@ -3,7 +3,7 @@
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.colorscheme = "spacegray"
+lvim.colorscheme = "nord"
 
 -- keymappings
 lvim.leader = "space"
@@ -49,17 +49,64 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 
 -- Additional Plugins
--- lvim.plugins = {
---     {"folke/tokyonight.nvim"}, {
---         "ray-x/lsp_signature.nvim",
---         config = function() require"lsp_signature".on_attach() end,
---         event = "InsertEnter"
---     }
--- }
+lvim.plugins = {
+    {
+        "ray-x/lsp_signature.nvim",
+        config = function() require"lsp_signature".on_attach() end,
+        event = "InsertEnter"
+    },
+    {
+      "vimwiki/vimwiki"
+    },
+    {
+      "folke/trouble.nvim"
+    },
+    {
+      "tpope/vim-surround"
+    },
+    {
+      "norcalli/nvim-colorizer.lua"
+    },
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+lvim.autocommands.custom_groups = {
+  { "BufWinLeave", "/home/corentin/.local/src/dmenu/config.h", "!doas make install" },
+  { "BufWinLeave", "/home/corentin/.local/src/dwm/config.h", "!doas make install" },
+  { "BufWinLeave", "/home/corentin/.local/src/dwmblocks/config.h", "!doas make install" },
+  { "BufWinLeave", "/home/corentin/.local/src/sent/config.h", "!doas make install" },
+  { "BufWinLeave", "/home/corentin/.local/src/st/config.h", "!doas make install" },
+}
 
--- Additional Leader bindings for WhichKey
+-- Dashboard configuration
+
+lvim.builtin.dashboard.custom_header = { " Nord  "}
+lvim.builtin.dashboard.footer = { " Corentin. " }
+lvim.builtin.dashboard.custom_section = {
+        a = {
+        description = { "  Rechercher         " },
+        command = "Telescope find_files",
+      },
+      b = {
+        description = { "  Fichiers récents   " },
+        command = "Telescope oldfiles",
+      },
+      c = {
+        description = { "  Rechercher un mot  " },
+        command = "Telescope live_grep",
+      },
+      d = {
+        description = { "  Options            " },
+        -- command = ":e " .. CONFIG_PATH .. "/lv-config.lua",
+        command = ":e ~/.config/lvim/lv-config.lua",
+      },
+      e = {
+        description = { "﬜  Wiki               " },
+        command = ":VimwikiIndex"
+      }
+}
+
+-- Vimscript commands
+
+vim.cmd "set spelllang=fr"
+vim.cmd "let g:vimwiki_list = [{'path': '~/.Wiki', 'syntax': 'markdown', 'ext': '.md'}]"
